@@ -10,20 +10,8 @@ def start():
 @app.route("/calculation", methods=["POST"])
 def calculation():
     data = request.json
-    controller.validation(data)
-    a, b, action = data.values()
+    return controller.calculate(data)
 
-
-    if action == "+":
-        response = controller.sum(a, b)
-    elif action == "-":
-        response = controller.diff(a, b)
-    elif action == "*":
-        response = controller.mult(a, b)
-    elif action == "/":
-        response = controller.div(a, b)
-
-    return str(response)
 
 # @app.route("/text_redactor", methods=["POST"])
 

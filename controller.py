@@ -30,4 +30,20 @@ class Controller:
     def div(self, a, b):
         return a / b
 
+    def calculate(self, data):
+        error = controller.validation(data)
+        if error:
+            return error
+
+        a, b, action = data.values()
+
+        if action == "+":
+            return str(controller.sum(a, b))
+        elif action == "-":
+            return str(controller.diff(a, b))
+        elif action == "*":
+            return str(controller.mult(a, b))
+        elif action == "/":
+            return str(controller.div(a, b))
+
 controller = Controller()

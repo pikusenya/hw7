@@ -1,5 +1,6 @@
 /env
 /Rival
 /server_lesson
+/__pycache__
 hw.py
 server_lesson/server_lesson.rar
