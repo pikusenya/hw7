@@ -10,13 +10,19 @@ class Controller:
     def validation(self, data):
         try:
             validator.validate_type(data, dict)
-        except TypeError:
-            return 'Неверный тип данных, передайте данные в словаре,' \
-                   'для более детальной информации обратитесь к запросу "/help"'
-        try:
             validator.validate_action(data["action"])
+        except TypeError:
+            return 'Неверный тип данных, передайте данные в словаре, ' \
+                   'для более детальной информации обратитесь к запросу "/help"'
         except InvalidAction as error:
             return error.TEXT_EXCEPTION
+        try:
+            validator.validate_type(data["a"], (int, float))
+            validator.validate_type(data["b"], (int, float))
+        except TypeError:
+            return 'Неверный тип данных, передайте данные в виде чисел, ' \
+                   'для более детальной информации обратитесь к запросу "/help"'
+
 
     def sum(self, a, b):
         return a + b
