@@ -7,6 +7,20 @@ app = Flask("test_prjct")
 def start():
     return "this is test prjct"
 
+@app.route("/help")
+def help():
+    return ''' Доступные команды: /calculation, /text_editor, /parser.
+Calculation: производит математические операции +, -, * и /.
+Данные передавать в виде словаря со следующими ключами: {"a": int, "b": int, "action": +, -, * или /}
+
+Text_editor: преобразует передаваемый текст.
+Данные передавать в виде словаря со следующими ключами: {"text": "текст", "action": upper, lower, trim или alter}
+Upper возвращает "ТЕКСТ" буквами, lower возвращает "текст" строчными буквами, trim убирает пробелы из текста, alter возвращает перевернутый "тскет"
+
+Parser: находит емэйлы или номера телефонов в тексте.
+Данные передавать в виде словаря со следующими ключами: {"text": "текст", "action": email или number}
+'''
+
 @app.route("/calculation", methods=["POST"])
 def calculation():
     data = request.json
