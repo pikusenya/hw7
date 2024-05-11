@@ -13,10 +13,15 @@ def calculation():
     return controller.calculate(data)
 
 
-# @app.route("/text_redactor", methods=["POST"])
+@app.route("/text_editor", methods=["POST"])
+def text_editor():
+    data = request.json
+    return controller.text_editor(data)
 
-
-# @app.route("/parser", methods=["POST"])
+@app.route("/parser", methods=["POST"])
+def parser():
+    data = request.json
+    return controller.parser(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

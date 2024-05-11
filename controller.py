@@ -1,55 +1,71 @@
-from model import model
 from validator import validator
-from my_exceptions import InvalidAction
 
 class Controller:
-    def get_json_data(self, operation):
-        data = model.get_data_from_file('data.json')
-        return data[operation]
-
-    def validation(self, data):
-        try:
-            validator.validate_type(data, dict)
-            validator.validate_action(data["action"])
-        except TypeError:
-            return 'Неверный тип данных, передайте данные в словаре, ' \
-                   'для более детальной информации обратитесь к запросу "/help"'
-        except InvalidAction as error:
-            return error.TEXT_EXCEPTION
-        try:
-            validator.validate_type(data["a"], (int, float))
-            validator.validate_type(data["b"], (int, float))
-        except TypeError:
-            return 'Неверный тип данных, передайте данные в виде чисел, ' \
-                   'для более детальной информации обратитесь к запросу "/help"'
-
-
-    def sum(self, a, b):
+    def calc_sum(self, a, b):
         return a + b
-
-    def diff(self, a, b):
+    def calc_diff(self, a, b):
         return a - b
-
-    def mult(self, a, b):
+    def calc_mult(self, a, b):
         return a * b
-
-    def div(self, a, b):
+    def calc_div(self, a, b):
         return a / b
 
     def calculate(self, data):
-        error = controller.validation(data)
+        error = validator.val_calculate(data)
         if error:
             return error
 
         a, b, action = data.values()
 
         if action == "+":
-            return str(controller.sum(a, b))
+            return str(controller.calc_sum(a, b))
         elif action == "-":
-            return str(controller.diff(a, b))
+            return str(controller.calc_diff(a, b))
         elif action == "*":
-            return str(controller.mult(a, b))
+            return str(controller.calc_mult(a, b))
         elif action == "/":
-            return str(controller.div(a, b))
+            return str(controller.calc_div(a, b))
+
+    def text_upper(self, text):
+        return text.upper()
+    def text_lower(self, text):
+        return text.lower()
+    def text_trim(self, text):
+        return text.strip()
+    def text_alter(self, text):
+        return text[::-1]
+
+    def text_editor(self, data):
+        error = validator.val_text_editor(data)
+        if error:
+            return error
+
+        text, action = data.values()
+
+        if action == "upper":
+            return controller.text_upper(str(text))
+        elif action == "lower":
+            return controller.text_lower(str(text))
+        elif action == "trim":
+            return controller.text_trim(str(text))
+        elif action == "alter":
+            return controller.text_alter(str(text))
+
+    def text_email(self, text):
+        pass
+    def text_number(self, text):
+        pass
+    def parser(self, data):
+        error = validator.val_parser(data)
+        if error:
+            return error
+
+        text, action = data.values()
+
+        if action == "email":
+            return controller.text_email(str(text))
+        if action == "number":
+            return controller.text_number(str(text))
+
 
 controller = Controller()
