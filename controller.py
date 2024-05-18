@@ -1,5 +1,6 @@
 from validator import validator
 from typing import Union
+import re
 
 
 class Controller:
@@ -140,7 +141,8 @@ class Controller:
         Return:
             емэйлы
         """
-        pass
+        emails = re.findall(r'[\w\.-]+@[\w\.-]+', text)
+        return ', '.join(emails)
 
     def text_number(self, text: str) -> str:
         """
@@ -150,7 +152,8 @@ class Controller:
         Return:
             номера телефонов
         """
-        pass
+        phone_numbers = re.findall(r'(?:(?:8|\+7)[\- ]?)?(?:\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}', text)
+        return ', '.join(phone_numbers)
 
     def parser(self, data: dict) -> str:
         """
@@ -167,9 +170,9 @@ class Controller:
         text, action = data.values()
 
         if action == "email":
-            return controller.text_email(str(text))
+            return controller.text_email(text)
         if action == "number":
-            return controller.text_number(str(text))
+            return controller.text_number(text)
 
 
 controller = Controller()
