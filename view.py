@@ -12,7 +12,7 @@ def start():
     return "this is test prjct"
 
 
-@app.route("/helpme")
+@app.route("/helpme", methods=["GET"])
 def helpme():
     """
     Функция возвращает информацию со справкой по работе проекта.

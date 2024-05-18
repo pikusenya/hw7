@@ -2,7 +2,7 @@ from my_exceptions import InvalidAction, InvalidKey, InvalidType
 
 
 class Validator:
-    def validate_type(self, data, type_data):
+    def validate_type(self, data: dict, type_data: type):
         """
         Метод проверяет соответствие данных передаваемому типу данных
         Args:
@@ -13,7 +13,7 @@ class Validator:
         if not isinstance(data, type_data):
             raise InvalidType
 
-    def validate_action(self, action, action_list):
+    def validate_action(self, action: str, action_list: tuple):
         """
         Метод проверяет соответствие операции передаваемому списку операций
         Args:
@@ -24,7 +24,7 @@ class Validator:
         if action not in action_list:
             raise InvalidAction
 
-    def validate_keys(self, data, keys):
+    def validate_keys(self, data: dict, keys: list):
         """
         Метод проверяет соответствие ключа передаваемому списку ключей
         Args:
@@ -36,7 +36,7 @@ class Validator:
             if key not in keys:
                 raise InvalidKey
 
-    def val_calculate(self, data):
+    def val_calculate(self, data: dict) -> str:
         """
         Метод проверяет соответствие данных для выполнения математических операций
         Args:
@@ -57,7 +57,7 @@ class Validator:
         except InvalidKey as error:
             return error.TEXT_EXCEPTION
 
-    def val_text_editor(self, data):
+    def val_text_editor(self, data: dict) -> str:
         """
         Метод проверяет соответствие данных для выполнения преобразований текста
         Args:
@@ -76,7 +76,7 @@ class Validator:
         except InvalidKey as error:
             return error.TEXT_EXCEPTION
 
-    def val_parser(self, data):
+    def val_parser(self, data: dict) -> str:
         """
         Метод проверяет соответствие данных для парсинга текста
         Args:

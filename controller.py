@@ -1,9 +1,10 @@
 from validator import validator
+from typing import Union
 
 
 class Controller:
     # Блок методов для математических вычислений.
-    def calc_sum(self, a, b):
+    def calc_sum(self, a, b) -> Union[int, float]:
         """
         Метод суммирует передаваемые аргументы.
         Args:
@@ -13,37 +14,37 @@ class Controller:
         """
         return a + b
 
-    def calc_diff(self, a, b):
+    def calc_diff(self, a, b) -> Union[int, float]:
         """
         Метод вычетает из первого аргумента второй.
         Args:
             2 числа
         Return:
-            разность 2х чисел
+            разность 2-х чисел
         """
         return a - b
 
-    def calc_mult(self, a, b):
+    def calc_mult(self, a, b) -> Union[int, float]:
         """
         Метод перемножает передаваемые аргументы.
         Args:
             2 числа
         Return:
-            результат перемножения 2х чисел
+            результат перемножения 2-х чисел
         """
         return a * b
 
-    def calc_div(self, a, b):
+    def calc_div(self, a, b) -> Union[int, float]:
         """
         Метод делит первый аргумент на второй.
         Args:
             2 числа
         Return:
-            результат деления 2х чисел
+            результат деления 2-х чисел
         """
         return a / b
 
-    def calculate(self, data):
+    def calculate(self, data: dict) -> str:
         """
         Метод производит математические операции над передаваемыми данными.
         Args:
@@ -67,47 +68,47 @@ class Controller:
             return str(controller.calc_div(a, b))
 
 # Блок методов для преобразования текста
-    def text_upper(self, text):
+    def text_upper(self, text: str) -> str:
         """
         Метод преобразовывает текст в заглавные буквы.
         Args:
-            текст
+            text: текст
         Return:
             текст заглавными буквами
         """
         return text.upper()
 
-    def text_lower(self, text):
+    def text_lower(self, text: str) -> str:
         """
         Метод преобразовывает текст в строчные буквы.
         Args:
-            текст
+            text: текст
         Return:
             текст строчными буквами
         """
         return text.lower()
 
-    def text_trim(self, text):
+    def text_trim(self, text: str) -> str:
         """
         Метод удаляет пробелы в передаваемом тексте.
         Args:
-            текст
+            text: текст
         Return:
             текст без пробелов
         """
         return text.strip()
 
-    def text_alter(self, text):
+    def text_alter(self, text: str) -> str:
         """
         Метод переворачивает передаваемый текст.
         Args:
-            текст
+            text: текст
         Return:
             перевернутый текст
         """
         return text[::-1]
 
-    def text_editor(self, data):
+    def text_editor(self, data: dict) -> str:
         """
         Метод преобразовывает передаваемый текст.
         Args:
@@ -131,27 +132,27 @@ class Controller:
             return controller.text_alter(str(text))
 
 # Блок методов для парсинга в тексте емэйлов и номеров телефонов
-    def text_email(self, text):
+    def text_email(self, text: str) -> str:
         """
         Метод ищет емэйлы в тексте.
         Args:
-            текст
+            text: текст
         Return:
             емэйлы
         """
         pass
 
-    def text_number(self, text):
+    def text_number(self, text: str) -> str:
         """
         Метод ищет номера телефонов в тексте.
         Args:
-            текст
+            text: текст
         Return:
             номера телефонов
         """
         pass
 
-    def parser(self, data):
+    def parser(self, data: dict) -> str:
         """
         Метод нужную информацию (емэйл, номер телефона) в тексте.
         Args:
