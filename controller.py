@@ -4,7 +4,32 @@ import re
 
 
 class Controller:
+    def calc_map_func(self, action, a, b):
+        func_map = {
+            "+": self.calc_sum,
+            "-": self.calc_diff,
+            "*": self.calc_mult,
+            "/": self.calc_div
+        }
+        return str(func_map[action](a, b))
+
+    def text_map_func(self, action, text):
+        func_map = {
+            "upper": self.text_upper,
+            "lower": self.text_lower,
+            "trim": self.text_trim,
+            "alter": self.text_alter
+        }
+        return str(func_map[action](text))
+
+    def parser_map_func(self, action, text):
+        func_map = {
+            "email": self.text_email,
+            "number": self.text_number,
+        }
+        return str(func_map[action](text))
     # Блок методов для математических вычислений.
+
     def calc_sum(self, a, b) -> Union[int, float]:
         """
         Метод суммирует передаваемые аргументы.
@@ -17,7 +42,7 @@ class Controller:
 
     def calc_diff(self, a, b) -> Union[int, float]:
         """
-        Метод вычетает из первого аргумента второй.
+        Метод вычитает из первого аргумента второй.
         Args:
             2 числа
         Return:
@@ -58,15 +83,7 @@ class Controller:
             return error
 
         a, b, action = data.values()
-
-        if action == "+":
-            return str(self.calc_sum(a, b))
-        elif action == "-":
-            return str(self.calc_diff(a, b))
-        elif action == "*":
-            return str(self.calc_mult(a, b))
-        elif action == "/":
-            return str(self.calc_div(a, b))
+        return self.calc_map_func(action, a, b)
 
 # Блок методов для преобразования текста
     def text_upper(self, text: str) -> str:
@@ -123,14 +140,7 @@ class Controller:
 
         text, action = data.values()
 
-        if action == "upper":
-            return self.text_upper(str(text))
-        elif action == "lower":
-            return self.text_lower(str(text))
-        elif action == "trim":
-            return self.text_trim(str(text))
-        elif action == "alter":
-            return self.text_alter(str(text))
+        return self.text_map_func(action, text)
 
 # Блок методов для парсинга в тексте емэйлов и номеров телефонов
     def text_email(self, text: str) -> str:
@@ -152,7 +162,7 @@ class Controller:
         Return:
             номера телефонов
         """
-        phone_numbers = re.findall(r'(?:7|8|\+7)(?:[\s\(-]?|\s\()[\d]{3}(?:\)|-|\s)*[\d]{3}[-\s]?[\d]{2}[-\s]?[\d]{2}', text)
+        phone_numbers = re.findall(r'(?:7|8|\+7)(?:[\s\(-]?|\s\()\d{3}(?:\)|-|\s)*\d{3}[-\s]?\d{2}[-\s]?\d{2}', text)
         return ', '.join(phone_numbers)
 
     def parser(self, data: dict) -> str:
@@ -169,10 +179,7 @@ class Controller:
 
         text, action = data.values()
 
-        if action == "email":
-            return self.text_email(text)
-        if action == "number":
-            return self.text_number(text)
+        return self.parser_map_func(action, text)
 
 
 controller = Controller()

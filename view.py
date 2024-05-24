@@ -51,6 +51,7 @@ def text_editor():
     data = request.json
     return controller.text_editor(data)
 
+
 @app.route("/parser", methods=["POST"])
 def parser():
     """
