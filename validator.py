@@ -45,16 +45,12 @@ class Validator:
             описание найденной ошибки
         """
         try:
-            validator.validate_type(data, dict)
-            validator.validate_type(data["a"], (int, float))
-            validator.validate_type(data["b"], (int, float))
-            validator.validate_action(data["action"], ('+', '-', '/', '*'))
-            validator.validate_keys(data, ["a", "b", "action"])
-        except InvalidType as error:
-            return error.TEXT_EXCEPTION
-        except InvalidAction as error:
-            return error.TEXT_EXCEPTION
-        except InvalidKey as error:
+            self.validate_type(data, dict)
+            self.validate_type(data["a"], (int, float))
+            self.validate_type(data["b"], (int, float))
+            self.validate_action(data["action"], ('+', '-', '/', '*'))
+            self.validate_keys(data, ["a", "b", "action"])
+        except (InvalidType, InvalidAction, InvalidKey) as error:
             return error.TEXT_EXCEPTION
 
     def val_text_editor(self, data: dict) -> str:
@@ -66,14 +62,10 @@ class Validator:
             описание найденной ошибки
         """
         try:
-            validator.validate_type(data, dict)
-            validator.validate_action(data["action"], ("upper", "lower", "trim", "alter"))
-            validator.validate_keys(data, ["text", "action"])
-        except InvalidType as error:
-            return error.TEXT_EXCEPTION
-        except InvalidAction as error:
-            return error.TEXT_EXCEPTION
-        except InvalidKey as error:
+            self.validate_type(data, dict)
+            self.validate_action(data["action"], ("upper", "lower", "trim", "alter"))
+            self.validate_keys(data, ["text", "action"])
+        except (InvalidType, InvalidAction, InvalidKey) as error:
             return error.TEXT_EXCEPTION
 
     def val_parser(self, data: dict) -> str:
@@ -85,14 +77,10 @@ class Validator:
            описание найденной ошибки
         """
         try:
-            validator.validate_type(data, dict)
-            validator.validate_action(data["action"], ("email", "number"))
-            validator.validate_keys(data, ["text", "action"])
-        except InvalidType as error:
-            return error.TEXT_EXCEPTION
-        except InvalidAction as error:
-            return error.TEXT_EXCEPTION
-        except InvalidKey as error:
+            self.validate_type(data, dict)
+            self.validate_action(data["action"], ("email", "number"))
+            self.validate_keys(data, ["text", "action"])
+        except (InvalidType, InvalidAction, InvalidKey) as error:
             return error.TEXT_EXCEPTION
 
 

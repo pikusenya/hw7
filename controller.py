@@ -60,13 +60,13 @@ class Controller:
         a, b, action = data.values()
 
         if action == "+":
-            return str(controller.calc_sum(a, b))
+            return str(self.calc_sum(a, b))
         elif action == "-":
-            return str(controller.calc_diff(a, b))
+            return str(self.calc_diff(a, b))
         elif action == "*":
-            return str(controller.calc_mult(a, b))
+            return str(self.calc_mult(a, b))
         elif action == "/":
-            return str(controller.calc_div(a, b))
+            return str(self.calc_div(a, b))
 
 # Блок методов для преобразования текста
     def text_upper(self, text: str) -> str:
@@ -124,13 +124,13 @@ class Controller:
         text, action = data.values()
 
         if action == "upper":
-            return controller.text_upper(str(text))
+            return self.text_upper(str(text))
         elif action == "lower":
-            return controller.text_lower(str(text))
+            return self.text_lower(str(text))
         elif action == "trim":
-            return controller.text_trim(str(text))
+            return self.text_trim(str(text))
         elif action == "alter":
-            return controller.text_alter(str(text))
+            return self.text_alter(str(text))
 
 # Блок методов для парсинга в тексте емэйлов и номеров телефонов
     def text_email(self, text: str) -> str:
@@ -170,9 +170,9 @@ class Controller:
         text, action = data.values()
 
         if action == "email":
-            return controller.text_email(text)
+            return self.text_email(text)
         if action == "number":
-            return controller.text_number(text)
+            return self.text_number(text)
 
 
 controller = Controller()
