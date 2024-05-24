@@ -152,7 +152,7 @@ class Controller:
         Return:
             номера телефонов
         """
-        phone_numbers = re.findall(r'(?:(?:8|\+7)[\- ]?)?(?:\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}', text)
+        phone_numbers = re.findall(r'(?:7|8|\+7)(?:[\s\(-]?|\s\()[\d]{3}(?:\)|-|\s)*[\d]{3}[-\s]?[\d]{2}[-\s]?[\d]{2}', text)
         return ', '.join(phone_numbers)
 
     def parser(self, data: dict) -> str:
